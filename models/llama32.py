@@ -1,5 +1,6 @@
 from .base import BaseModel
 
+import torch
 from PIL import Image
 Image.MAX_IMAGE_PIXELS = None
 from transformers import AutoProcessor, MllamaForConditionalGeneration
@@ -34,9 +35,10 @@ class Llama32(BaseModel):
 
 
     def generate(self, inputs: dict, **generation_kwargs) -> str:
-        outputs = self.model.generate(**inputs, **generation_kwargs)
-        outputs = self.processor.decode(outputs[0], skip_special_tokens=True)
-        response = self.post_process(outputs)
+        with torch.inference_mode():
+            outputs = self.model.generate(**inputs, **generation_kwargs)
+            outputs = self.processor.decode(outputs[0], skip_special_tokens=True)
+            response = self.post_process(outputs)
 
         return response
     
