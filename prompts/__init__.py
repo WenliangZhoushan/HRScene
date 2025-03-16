@@ -1,6 +1,7 @@
-from .prompts import whitebackground_prompt
+from .prompts import complexgrid_prompt, whitebackground_prompt
 
 
 __all__ = [
-    "whitebackground_prompt"
+    "complexgrid_prompt",
+    "whitebackground_prompt",
 ]

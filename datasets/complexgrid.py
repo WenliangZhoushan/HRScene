@@ -3,17 +3,17 @@ import os
 from typing import Any, List, Literal, Tuple
 
 from .base import BaseDataset
-from prompts import whitebackground_prompt
+from prompts import complexgrid_prompt
 
-WHITEBACKGROUND_PROMPT = whitebackground_prompt()
+COMPLEXGRID_PROMPT = complexgrid_prompt()
 
 
-class WhiteBackgroundDataset(BaseDataset):
+class ComplexGridDataset(BaseDataset):
     def __init__(
             self, root: str, split: Literal["test"], download: bool, grid_size: int, num_samples: int = 500
         ) -> None:
-        assert split in ["test"], "WhiteBackgroundDataset only supports test split"
-        assert grid_size in [1, 3, 5, 7, 10], "WhiteBackgroundDataset only supports grid size 1, 3, 5, 7, 10"
+        assert split in ["test"], "ComplexGridDataset only supports test split"
+        assert grid_size in [3, 5, 7, 10], "ComplexGridDataset only supports grid size 3, 5, 7, 10"
         
         self.grid_size = grid_size
         self.num_samples = num_samples
@@ -27,7 +27,7 @@ class WhiteBackgroundDataset(BaseDataset):
 
     def _check_exists(self) -> bool:
         exists = os.path.exists(
-            os.path.join(self.root, "whitebackground", self.split, f"{self.grid_size}x{self.grid_size}")
+            os.path.join(self.root, "complexgrid", self.split, f"{self.grid_size}x{self.grid_size}")
         )
 
         return exists
@@ -36,20 +36,20 @@ class WhiteBackgroundDataset(BaseDataset):
     def _load_data(self) -> Tuple[List[dict[str, Any]], List[List[str]]]:
         data, targets = [], []
 
-        json_path = os.path.join(self.root, "whitebackground", self.split, "data.json")
+        json_path = os.path.join(self.root, "complexgrid", self.split, "complexgrid.json")
         json_inputs = json.load(open(json_path))[:self.num_samples]
-        image_dir = os.path.join(self.root, "whitebackground", self.split, f"{self.grid_size}x{self.grid_size}")
+        image_dir = os.path.join(self.root, "complexgrid", self.split, f"{self.grid_size}x{self.grid_size}")
 
         for idx, line in enumerate(json_inputs):
             for i in range(self.grid_size * self.grid_size):
                 row_idx, col_idx = i // self.grid_size, i % self.grid_size
                 data.append({
-                    "question": WHITEBACKGROUND_PROMPT.format(question=line["question"]),
+                    "question": COMPLEXGRID_PROMPT.format(caption=line["caption"]),
                     "image_path": os.path.join(image_dir, str(idx), f"grid_{row_idx}_{col_idx}.jpg"),
                 })
                 targets.append({
                     "id_row_col": f'{idx}_{row_idx}_{col_idx}',
-                    "answer": line["answer"],
+                    "answer": f'row:{row_idx + 1}, col:{col_idx + 1}',
                 })
 
         return data, targets
