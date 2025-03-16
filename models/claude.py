@@ -18,8 +18,11 @@ class Claude(BaseModel):
         image_path = inputs["image_path"]
         with open(image_path, "rb") as image_file:
             base64_image = base64.b64encode(image_file.read()).decode("utf-8")
-        image_type = image_path.split(".")[-1].lower()
-        image_type = "jpeg" if image_type == "jpg" else image_type
+        if "image_type" in inputs:
+            image_type = inputs["image_type"]
+        else:
+            image_type = image_path.split(".")[-1].lower()
+            image_type = "jpeg" if image_type == "jpg" else image_type
 
         messages=[{
             "role": "user",
