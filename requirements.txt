@@ -1,3 +1,4 @@
+openai
 pillow
 torch
 transformers
