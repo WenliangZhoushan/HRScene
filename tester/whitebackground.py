@@ -5,7 +5,7 @@ from typing import Callable
 
 from .base import BaseTester
 from datasets.base import BaseDataset
-from evaluators import default_whitebackground_metrics
+from evaluators import default_whitebackground_metrics, draw_heatmap
 from models.base import BaseModel
 
 import numpy as np
@@ -17,6 +17,8 @@ class WhiteBackgroundTester(BaseTester):
         super().__init__(model, dataset)
         self.responses = []
         self.labels = []
+        self.model_name = getattr(self.model, "MODEL_NAME", "Custom Model")
+        self.experiment_name = f"WhiteBackground {self.model_name} {self.dataset.grid_size}x{self.dataset.grid_size}"
 
 
     def run(self, **generation_kwargs) -> None:
@@ -55,4 +57,12 @@ class WhiteBackgroundTester(BaseTester):
             f.write(f"Median score: {np.median(scores)}\n")
             f.write(f"Standard deviation: {scores.std()}\n")
         
-        return
+        draw_heatmap(eval_results, self.dataset.grid_size, self.experiment_name, eval_results_dir)
+
+        print(f"Finished evaluation for experiment: {self.experiment_name}")
+        print(f'- Model: {self.model_name}')
+        print(f'- Dataset: WhiteBackground {self.dataset.grid_size}x{self.dataset.grid_size}')
+        print(f'- Average score: {float(scores.mean()):.2f}')
+        print(f'- Median score: {float(np.median(scores)):.2f}')
+        print(f'- Standard deviation: {float(scores.std()):.2f}')
+        print(f'- Results saved in: {eval_results_dir}')
