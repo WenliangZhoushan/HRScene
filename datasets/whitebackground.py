@@ -36,7 +36,7 @@ class WhiteBackgroundDataset(BaseDataset):
     def _load_data(self) -> Tuple[List[dict[str, Any]], List[List[str]]]:
         data, targets = [], []
 
-        json_path = os.path.join(self.root, "whitebackground", self.split, "data.json")
+        json_path = os.path.join(self.root, "whitebackground", self.split, "whitebackground.json")
         json_inputs = json.load(open(json_path))[:self.num_samples]
         image_dir = os.path.join(self.root, "whitebackground", self.split, f"{self.grid_size}x{self.grid_size}")
 
