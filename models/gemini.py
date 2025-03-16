@@ -1,4 +1,3 @@
-import base64
 from .base import BaseModel
 
 from google import genai
