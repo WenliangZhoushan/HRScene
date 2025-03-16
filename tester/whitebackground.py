@@ -1,5 +1,6 @@
 import importlib
 import os
+import time
 from typing import Callable
 
 from .base import BaseTester
@@ -20,12 +21,18 @@ class WhiteBackgroundTester(BaseTester):
         for x, y in tqdm(self.dataset, desc='Inferencing WhiteBackground'):
             inputs = self.model.process_inputs(x)
             response = self.model.generate(inputs, **generation_kwargs)
+            response = {
+                "response": response,
+                "metadata": x
+            }
 
             self.responses.append(response)
             self.labels.append(y)
 
 
-    def eval(self, eval_results_dir: str, metrics: str | Callable) -> None:
+    def eval(self, eval_results_dir: str | None = None, metrics: str | Callable = "default") -> None:
+        if not eval_results_dir:
+            eval_results_dir = os.path.join("results", "whitebackground", time.strftime("%Y%m%d_%H%M%S"))
         os.makedirs(eval_results_dir, exist_ok=True)
         if isinstance(metrics, str):
             metrics = getattr(importlib.import_module("evaluators"), metrics)
