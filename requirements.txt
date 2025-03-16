@@ -1,8 +1,10 @@
 anthropic
 google-genai
 numpy
+matplotlib
 openai
 pillow
+seaborn
 torch
 transformers
 tqdm
