@@ -1,0 +1,4 @@
+pillow
+torch
+transformers
+tqdm
