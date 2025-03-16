@@ -12,6 +12,9 @@ class WhiteBackgroundDataset(BaseDataset):
     def __init__(
             self, root: str, split: Literal["test"], download: bool, grid_size: int, num_samples: int = 500
         ) -> None:
+        assert split in ["test"], "WhiteBackgroundDataset only supports test split"
+        assert grid_size in [1, 3, 5, 7, 10], "WhiteBackgroundDataset only supports grid size 1, 3, 5, 7, 10"
+        
         self.grid_size = grid_size
         self.num_samples = num_samples
         super().__init__(root, split, download)
