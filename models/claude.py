@@ -5,6 +5,8 @@ from anthropic import Anthropic
 
 
 class Claude(BaseModel):
+    MODEL_NAME = "Claude"
+
     def __init__(self, model_path: str, **model_kwargs) -> None:
         super().__init__(model_path, **model_kwargs)
         self.model = model_path

@@ -7,6 +7,8 @@ from transformers import AutoModelForCausalLM, AutoProcessor
 
 
 class Phi35(BaseModel):
+    MODEL_NAME = "Phi35"
+
     def __init__(self, model_path: str, **model_kwargs) -> None:
         super().__init__(model_path, **model_kwargs)
         self.device = self.model.device

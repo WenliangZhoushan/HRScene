@@ -7,6 +7,8 @@ from transformers import AutoProcessor, MllamaForConditionalGeneration
 
 
 class Llama32(BaseModel):
+    MODEL_NAME = "Llama32"
+
     def __init__(self, model_path: str, **model_kwargs) -> None:
         super().__init__(model_path, **model_kwargs)
         self.device = self.model.device

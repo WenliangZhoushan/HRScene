@@ -5,6 +5,8 @@ from google.genai import types
 
 
 class Gemini(BaseModel):
+    MODEL_NAME = "Gemini"
+
     def __init__(self, model_path: str, **model_kwargs) -> None:
         super().__init__(model_path, **model_kwargs)
         self.model = model_path

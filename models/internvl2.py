@@ -6,6 +6,8 @@ from transformers import AutoModel, AutoTokenizer
 
 
 class Internvl2(BaseModel):
+    MODEL_NAME = "Internvl2"
+    
     def __init__(self, model_path: str, **model_kwargs) -> None:
         super().__init__(model_path, **model_kwargs)
         self.device = self.model.device

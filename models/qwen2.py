@@ -7,6 +7,8 @@ from transformers import Qwen2VLForConditionalGeneration, AutoProcessor
 
 
 class Qwen2VL(BaseModel):
+    MODEL_NAME = "Qwen2VL"
+
     def __init__(self, model_path: str, **model_kwargs):
         super().__init__(model_path, **model_kwargs)
         self.device = self.model.device

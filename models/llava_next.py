@@ -7,6 +7,8 @@ from transformers import LlavaNextForConditionalGeneration, LlavaNextProcessor
 
 
 class LlavaNext(BaseModel):
+    MODEL_NAME = "LlavaNext"
+
     def __init__(self, model_path: str, **model_kwargs) -> None:
         super().__init__(model_path, **model_kwargs)
         self.device = self.model.device
