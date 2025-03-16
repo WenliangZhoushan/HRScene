@@ -32,8 +32,8 @@ class GPT(BaseModel):
         return messages
     
 
-    def generate(self, inputs: dict, **kwargs) -> str:
-        output = self.client.chat.completions.create(model=self.model, messages=inputs, **kwargs)
+    def generate(self, inputs: dict, **generation_kwargs) -> str:
+        output = self.client.chat.completions.create(model=self.model, messages=inputs, **generation_kwargs)
         response = output.choices[0].message.content
 
         return response

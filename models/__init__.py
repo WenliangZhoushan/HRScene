@@ -1,4 +1,5 @@
 from .base import BaseModel
+from .claude import Claude
 from .internvl2 import Internvl2
 from .llama32 import Llama32
 from .llava_next import LlavaNext
@@ -10,6 +11,7 @@ from .qwen2 import Qwen2VL
 
 __all__ = [
     "BaseModel",
+    "Claude",
     "Internvl2",
     "Llama32",
     "LlavaNext",
