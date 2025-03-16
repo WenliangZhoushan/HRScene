@@ -1,4 +1,4 @@
-import importlib
+import json
 import os
 import time
 from typing import Callable
@@ -6,7 +6,9 @@ from typing import Callable
 from .base import BaseTester
 from datasets.base import BaseDataset
 from models.base import BaseModel
+from evaluators import default_complexgrid_metrics
 
+import numpy as np
 from tqdm import tqdm
 
 
@@ -34,14 +36,21 @@ class ComplexGridTester(BaseTester):
         if not eval_results_dir:
             eval_results_dir = os.path.join("results", "complexgrid", time.strftime("%Y%m%d_%H%M%S"))
         os.makedirs(eval_results_dir, exist_ok=True)
-        if isinstance(metrics, str):
-            metrics = getattr(importlib.import_module("evaluators"), metrics)
+        if metrics == "default":
+            metrics = default_complexgrid_metrics
         else:
             metrics = metrics
 
-        # TODO: a dummy evaluation, add real evaluation logic
-        scores = 0
-        for response, label in zip(self.responses, self.labels):
-            scores += metrics(response, label)
+        eval_results = metrics(self.responses, self.labels)
+        scores = np.array([result["score"] for result in eval_results])
         
-        return scores / len(self.responses)
+        with open(os.path.join(eval_results_dir, "eval_results.jsonl"), "w") as f:
+            for result in eval_results:
+                f.write(json.dumps(result) + "\n")
+        
+        with open(os.path.join(eval_results_dir, "eval_scores.txt"), "w") as f:
+            f.write(f"Average score: {scores.mean()}\n")
+            f.write(f"Median score: {np.median(scores)}\n")
+            f.write(f"Standard deviation: {scores.std()}\n")
+        
+        return

@@ -23,6 +23,8 @@ class WhiteBackgroundTester(BaseTester):
         for x, y in tqdm(self.dataset, desc='Inferencing WhiteBackground'):
             inputs = self.model.process_inputs(x)
             response = self.model.generate(inputs, **generation_kwargs)
+            # remove the question from the response if it exists
+            response = response.split(x["question"])[-1]
             response = {
                 "response": response,
                 "metadata": x
@@ -53,4 +55,4 @@ class WhiteBackgroundTester(BaseTester):
             f.write(f"Median score: {np.median(scores)}\n")
             f.write(f"Standard deviation: {scores.std()}\n")
         
-        return eval_results
+        return
