@@ -13,8 +13,9 @@ class Molmo(BaseModel):
 
 
     def _init_model(self, model_path: str, **model_kwargs) -> None:
+        model_kwargs["trust_remote_code"] = model_kwargs.get("trust_remote_code", True)
         self.model = AutoModelForCausalLM.from_pretrained(model_path, **model_kwargs)
-        self.processor = AutoProcessor.from_pretrained(model_path)
+        self.processor = AutoProcessor.from_pretrained(model_path, **model_kwargs)
 
 
     def process_inputs(self, inputs: dict) -> dict:
