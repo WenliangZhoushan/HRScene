@@ -4,6 +4,7 @@ from .llama32 import Llama32
 from .llava_next import LlavaNext
 from .molmo import Molmo
 from .phi35 import Phi35
+from .qwen2 import Qwen2VL
 
 
 __all__ = [
@@ -13,4 +14,5 @@ __all__ = [
     "LlavaNext",
     "Molmo",
     "Phi35",
+    "Qwen2VL",
 ]

@@ -44,10 +44,13 @@ class WhiteBackgroundDataset(BaseDataset):
                     "question": f'{line["question"]}\n Answer as concise as possible, just a few words.',
                     "image_path": os.path.join(image_dir, str(idx), f"grid_{row_idx}_{col_idx}.jpg"),
                 })
-                targets.append(line["answer"])
+                targets.append({
+                    "id_row_col": f'{idx}_{row_idx}_{col_idx}',
+                    "answer": line["answer"],
+                })
 
         return data, targets
     
 
-    def __getitem__(self, idx: int) -> Tuple[dict[str, Any], List[str]]:
+    def __getitem__(self, idx: int) -> Tuple[dict[str, Any], dict[str, str]]:
         return self.data[idx], self.targets[idx]
