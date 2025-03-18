@@ -4,7 +4,7 @@ import time
 from typing import Callable
 
 from .base import BaseTester
-from datasets.base import BaseDataset
+from hrscene_datasets.base import BaseDataset
 from evaluators import default_whitebackground_metrics, draw_heatmap
 from models.base import BaseModel
 

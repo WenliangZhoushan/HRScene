@@ -1,4 +1,4 @@
-from datasets import ComplexGridDataset, WhiteBackgroundDataset
+from hrscene_datasets import ComplexGridDataset, WhiteBackgroundDataset
 from models import GPT, Llama32
 from tester import ComplexGridTester, WhiteBackgroundTester
 

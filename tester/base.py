@@ -1,6 +1,6 @@
 from typing import Callable
 
-from datasets.base import BaseDataset
+from hrscene_datasets.base import BaseDataset
 from models.base import BaseModel
 
 
