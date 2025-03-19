@@ -1,3 +1,5 @@
+import io
+
 from .base import BaseModel
 
 from google import genai
@@ -17,18 +19,14 @@ class Gemini(BaseModel):
 
 
     def process_inputs(self, inputs: dict) -> dict:
-        image_path = inputs["image_path"]
-        with open(image_path, "rb") as image_file:
-            image_bytes = image_file.read()
-        if "image_type" in inputs:
-            image_type = inputs["image_type"]
-        else:
-            image_type = image_path.split(".")[-1].lower()
-            image_type = "jpeg" if image_type == "jpg" else image_type
+        image = inputs["image"]
+        buffer = io.BytesIO()
+        image.save(buffer, format="JPEG")
+        image_bytes = buffer.getvalue()
         
         content = [
-            inputs["question"],
-            types.Part.from_bytes(data=image_bytes, mime_type=f'image/{image_type}')
+            inputs["prompt"],
+            types.Part.from_bytes(data=image_bytes, mime_type="image/jpeg")
         ]
 
         return content
