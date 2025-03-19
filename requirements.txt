@@ -1,4 +1,5 @@
 anthropic
+datasets
 google-genai
 numpy
 matplotlib

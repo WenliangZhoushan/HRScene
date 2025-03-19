@@ -20,9 +20,8 @@ class Llama32(BaseModel):
     
 
     def process_inputs(self, inputs: dict) -> dict:
-        image_path = inputs["image_path"]
-        image = Image.open(image_path)
-        prompt = f"<|image|><|begin_of_text|>{inputs['question']}"
+        image = inputs["image"]
+        prompt = f"<|image|><|begin_of_text|>{inputs['prompt']}"
 
         inputs = self.processor(image, prompt, return_tensors="pt").to(self.device)
 

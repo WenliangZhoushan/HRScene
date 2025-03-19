@@ -40,6 +40,8 @@ class DiagnosisTester(BaseTester):
 
             inputs = self.model.process_inputs(sample)
             response = self.model.generate(inputs, **generation_kwargs)
+            # remove the question from the response if it exists
+            response = response.split(sample["prompt"])[-1]
             response = {
                 "response": response,
                 "metadata": sample
