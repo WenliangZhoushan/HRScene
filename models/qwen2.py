@@ -20,14 +20,13 @@ class Qwen2VL(BaseModel):
 
 
     def process_inputs(self, inputs: dict) -> dict:
-        image_path = inputs["image_path"]
-        image = Image.open(image_path)
+        image = inputs["image"]
 
         message = [{
             "role": "user",
             "content": [
                 {"type": "image"},
-                {"type": "text", "text": inputs["question"]},
+                {"type": "text", "text": inputs["prompt"]},
             ],
         }]
         message = self.processor.apply_chat_template(
