@@ -15,17 +15,15 @@ class Phi35(BaseModel):
 
 
     def _init_model(self, model_path: str, **model_kwargs) -> None:
-        model_kwargs["trust_remote_code"] = model_kwargs.get("trust_remote_code", True)
         self.model = AutoModelForCausalLM.from_pretrained(model_path, **model_kwargs)
-        self.processor = AutoProcessor.from_pretrained(model_path, **model_kwargs)
+        self.processor = AutoProcessor.from_pretrained(model_path)
 
 
     def process_inputs(self, inputs: dict) -> dict:
-        image_path = inputs["image_path"]
-        image = Image.open(image_path)
+        image = inputs["image"]
 
         messages = [
-            {"role": "user", "content": "<|image_1|>\n" + inputs["question"]},
+            {"role": "user", "content": "<|image_1|>\n" + inputs["prompt"]},
         ]
         message: dict = self.processor.tokenizer.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True
