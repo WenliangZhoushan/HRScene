@@ -21,10 +21,9 @@ class Molmo(BaseModel):
 
 
     def process_inputs(self, inputs: dict) -> dict:
-        image_path = inputs["image_path"]
-        image = Image.open(image_path)
-        
-        inputs = self.processor.process(images=[image], text=inputs["question"])
+        image = inputs["image"]
+
+        inputs = self.processor.process(images=[image], text=inputs["prompt"])
         inputs["images"] = inputs["images"].to(torch.bfloat16)
         inputs = {k: v.to(self.device).unsqueeze(0) for k, v in inputs.items()}
 
@@ -38,5 +37,5 @@ class Molmo(BaseModel):
             )
             generated_tokens = output[0, inputs['input_ids'].size(1):]
             response = self.processor.tokenizer.decode(generated_tokens, skip_special_tokens=True)
-            print(response)
+            
         return response
