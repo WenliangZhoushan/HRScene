@@ -1,13 +1,19 @@
 from typing import Callable
 
-from hrscene_datasets.base import BaseDataset
 from models.base import BaseModel
 
 
 class BaseTester:
-    def __init__(self, model: BaseModel, dataset: BaseDataset) -> None:
+    def __init__(self, model: BaseModel, dataset_name: str, num_samples: int = 500) -> None:
         self.model = model
-        self.dataset = dataset
+        self._init_dataset(dataset_name)
+        self.task = dataset_name.split('_')[0]
+        self.grid_size = int(dataset_name.split('_')[1].split('x')[0])
+        self.num_samples = num_samples * self.grid_size * self.grid_size
+
+
+    def _init_dataset(self, dataset_name: str) -> None:
+        raise NotImplementedError
 
 
     def run(self, **generation_kwargs) -> None:

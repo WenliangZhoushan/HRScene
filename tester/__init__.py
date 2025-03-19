@@ -1,9 +1,7 @@
 from .base import BaseTester
-from .complexgrid import ComplexGridTester
-from .whitebackground import WhiteBackgroundTester
+from .diagnosis import DiagnosisTester
 
 __all__ = [
     "BaseTester",
-    "ComplexGridTester",
-    "WhiteBackgroundTester",
+    "DiagnosisTester"
 ]

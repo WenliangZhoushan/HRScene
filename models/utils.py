@@ -8,7 +8,7 @@ IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
 
 
-def internvl2_load_image(image_path: str) -> torch.Tensor:
+def internvl2_load_image(image: Image.Image) -> torch.Tensor:
     
     def build_transform(input_size):
         MEAN, STD = IMAGENET_MEAN, IMAGENET_STD
@@ -73,12 +73,12 @@ def internvl2_load_image(image_path: str) -> torch.Tensor:
             processed_images.append(thumbnail_img)
         return processed_images
 
-    def load_image(image_path, input_size=448, max_num=12):
-        image = Image.open(image_path).convert('RGB')
+    def load_image(image, input_size=448, max_num=12):
+        image = image.convert('RGB')
         transform = build_transform(input_size=input_size)
         images = dynamic_preprocess(image, image_size=input_size, use_thumbnail=True, max_num=max_num)
         pixel_values = [transform(image) for image in images]
         pixel_values = torch.stack(pixel_values)
         return pixel_values
 
-    return load_image(image_path)
+    return load_image(image)

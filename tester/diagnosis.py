@@ -1,47 +1,60 @@
+import importlib
 import json
 import os
 import time
-from typing import Callable
 
 from .base import BaseTester
-from hrscene_datasets.base import BaseDataset
-from evaluators import default_complexgrid_metrics, draw_heatmap
+from evaluators import draw_heatmap
 from models.base import BaseModel
 
 import numpy as np
+from datasets import load_dataset
 from tqdm import tqdm
 
 
-class ComplexGridTester(BaseTester):
-    def __init__(self, model: BaseModel, dataset: BaseDataset) -> None:
-        super().__init__(model, dataset)
+class DiagnosisTester(BaseTester):
+    def __init__(self, model: BaseModel, dataset_name: str, num_samples: int = 500) -> None:
+        super().__init__(model, dataset_name, num_samples)
         self.responses = []
         self.labels = []
         self.model_name = getattr(self.model, "MODEL_NAME", "Custom Model")
-        self.experiment_name = f"ComplexGrid {self.model_name} {self.dataset.grid_size}x{self.dataset.grid_size}"
+        self.experiment_name = f"{self.task} {self.model_name} {self.grid_size}x{self.grid_size}"
+    
+
+    def _init_dataset(self, dataset_name: str) -> None:
+        self.dataset = load_dataset("Wenliang04/HRScene-Diagnosis", dataset_name)
+        self.dataset = self.dataset['test']
 
 
     def run(self, **generation_kwargs) -> None:
-        for x, y in tqdm(self.dataset, desc='Inferencing ComplexGrid'):
-            inputs = self.model.process_inputs(x)
+        for i, sample in tqdm(enumerate(self.dataset), total=self.num_samples, desc=self.experiment_name):
+            if i >= self.num_samples:
+                break
+
+            prompt_template = getattr(importlib.import_module("prompts"), f"{self.task}_prompt")()
+            if self.task == "whitebackground":
+                prompt = prompt_template.format(question=sample["question"])
+            elif self.task == "complexgrid":
+                prompt = prompt_template.format(caption=sample["caption"])
+            sample['prompt'] = prompt
+
+            inputs = self.model.process_inputs(sample)
             response = self.model.generate(inputs, **generation_kwargs)
             response = {
                 "response": response,
-                "metadata": x
+                "metadata": sample
             }
 
             self.responses.append(response)
-            self.labels.append(y)
+            self.labels.append(sample["answer"])
 
 
-    def eval(self, eval_results_dir: str | None = None, metrics: str | Callable = "default") -> None:
+    def eval(self, eval_results_dir: str | None = None) -> None:
         if not eval_results_dir:
             eval_results_dir = os.path.join("results", "complexgrid", time.strftime("%Y%m%d_%H%M%S"))
         os.makedirs(eval_results_dir, exist_ok=True)
-        if metrics == "default":
-            metrics = default_complexgrid_metrics
-        else:
-            metrics = metrics
+
+        metrics = getattr(importlib.import_module("evaluators"), f"default_{self.task}_metrics")
 
         eval_results = metrics(self.responses, self.labels)
         scores = np.array([result["score"] for result in eval_results])
@@ -55,11 +68,11 @@ class ComplexGridTester(BaseTester):
             f.write(f"Median score: {np.median(scores)}\n")
             f.write(f"Standard deviation: {scores.std()}\n")
         
-        draw_heatmap(eval_results, self.dataset.grid_size, self.experiment_name, eval_results_dir)
+        draw_heatmap(eval_results, self.grid_size, self.experiment_name, eval_results_dir)
 
         print(f"Finished evaluation for experiment: {self.experiment_name}")
         print(f'- Model: {self.model_name}')
-        print(f'- Dataset: ComplexGrid {self.dataset.grid_size}x{self.dataset.grid_size}')
+        print(f'- Dataset: ComplexGrid {self.grid_size}x{self.grid_size}')
         print(f'- Average score: {float(scores.mean()):.2f}')
         print(f'- Median score: {float(np.median(scores)):.2f}')
         print(f'- Standard deviation: {float(scores.std()):.2f}')

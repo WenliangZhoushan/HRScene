@@ -19,13 +19,13 @@ class Internvl2(BaseModel):
 
 
     def process_inputs(self, inputs: dict) -> dict:
-        image_path = inputs["image_path"]
-        pixel_values = internvl2_load_image(image_path)
+        image = inputs["image"]
+        pixel_values = internvl2_load_image(image)
         pixel_values = pixel_values.to(dtype=torch.bfloat16, device=self.device)
 
         inputs = {
             "pixel_values": pixel_values,
-            "prompt": inputs["question"]
+            "prompt": inputs["prompt"]
         }
 
         return inputs
