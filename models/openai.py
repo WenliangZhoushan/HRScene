@@ -1,4 +1,6 @@
 import base64
+import io
+
 from .base import BaseModel
 
 from openai import OpenAI
@@ -17,20 +19,16 @@ class GPT(BaseModel):
 
 
     def process_inputs(self, inputs: dict) -> dict:
-        image_path = inputs["image_path"]
-        with open(image_path, "rb") as image_file:
-            base64_image = base64.b64encode(image_file.read()).decode("utf-8")
-        if "image_type" in inputs:
-            image_type = inputs["image_type"]
-        else:
-            image_type = image_path.split(".")[-1].lower()
-            image_type = "jpeg" if image_type == "jpg" else image_type
+        image = inputs["image"]
+        buffer = io.BytesIO()
+        image.save(buffer, format="JPEG")
+        base64_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
 
         messages=[{
             "role": "user",
             "content": [
-                {"type": "text", "text": inputs["question"]}, 
-                {"type": "image_url", "image_url": {"url": f"data:image/{image_type};base64,{base64_image}"}}
+                {"type": "text", "text": inputs["prompt"]}, 
+                {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"}}
             ]
         }]
 
