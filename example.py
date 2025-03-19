@@ -1,18 +1,17 @@
-from hrscene_datasets import ComplexGridDataset, WhiteBackgroundDataset
 from models import GPT, Llama32
-from tester import ComplexGridTester, WhiteBackgroundTester
-
+from tester import DiagnosisTester
 import torch
 
 
-dataset = WhiteBackgroundDataset(root="data", split="test", download=False, grid_size=5, num_samples=150)
-model = Llama32(model_path='meta-llama/Llama-3.2-11B-Vision', torch_dtype=torch.bfloat16, device_map="cuda")
-tester = WhiteBackgroundTester(model, dataset)
+# Example 1: Run 150 complexgrid_3x3 samples on local model
+model = Llama32(model_path="/scratch1/wmz5132/models/huggingface/Llama-3.2-11B-Vision-Instruct", torch_dtype=torch.bfloat16, device_map="cuda")
+tester = DiagnosisTester(model=model, dataset_name="complexgrid_3x3", num_samples=150)
 tester.run()
 tester.eval()
 
-dataset = ComplexGridDataset(root="data", split="test", download=False, grid_size=3, num_samples=200)
+
+# Example 2: Run complete whitebackground_7x7 samples on remote model
 model = GPT(model_path="gpt-4o-mini")
-tester = ComplexGridTester(model, dataset)
+tester = DiagnosisTester(model=model, dataset_name="whitebackground_7x7")
 tester.run()
 tester.eval()
