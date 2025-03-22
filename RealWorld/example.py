@@ -6,13 +6,14 @@ from models import GPT,Llama32
 from tester import RealWorldTester
 import torch
 
-
+# example 1: use api based model to run 5 samples of ArtBench subset
 model = GPT(model_path="gpt-4o-mini")
 tester = RealWorldTester(model=model, dataset_name="ArtBench", split="validation", num_samples=5)
 tester.run(max_tokens=100)
 tester.eval()
 
-# model = Llama32(model_path="/scratch1/wmz5132/models/huggingface/Llama-3.2-11B-Vision-Instruct", torch_dtype=torch.bfloat16, device_map="cuda")
-# tester = RealWorldTester(model=model, dataset_name="ArtBench", split="test_mini", num_samples=5)
-# tester.run(max_new_tokens=100)
-# tester.eval()
+# example 2: use local llama32 model to run complete realworld dataset
+model = Llama32(model_path="meta-llama/Llama-3.2-11B-Vision-Instruct", torch_dtype=torch.bfloat16, device_map="cuda")
+tester = RealWorldTester(model=model, dataset_name="ArtBench", split="test")
+tester.run(max_new_tokens=100)
+tester.eval()
