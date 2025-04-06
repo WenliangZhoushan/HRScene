@@ -19,7 +19,7 @@ model = Qwen2VL(
     model_path="Qwen/Qwen2-VL-7B-Instruct",
     torch_dtype=torch.bfloat16, attn_implementation="flash_attention_2", device_map="cuda"
 )
-tester = RealWorldTester(model=model, dataset_name="ArtBench", split="test")
+tester = RealWorldTester(model=model, dataset_name="realworld_combined", split="test")
 # feel free to set generation kwargs here or leave it empty
 tester.run(max_new_tokens=100, temperature=1e-5)
 tester.eval()
