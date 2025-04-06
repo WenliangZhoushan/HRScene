@@ -22,7 +22,7 @@ class DiagnosisTester(BaseTester):
     
 
     def _init_dataset(self, dataset_name: str) -> None:
-        self.dataset = load_dataset("Wenliang04/HRScene-Diagnosis", dataset_name)
+        self.dataset = load_dataset("Wenliang04/HRScene", dataset_name)
         self.dataset = self.dataset['test']
 
 
