@@ -6,9 +6,10 @@ from models.base import BaseModel
 class BaseTester:
     def __init__(self, model: BaseModel, dataset_name: str, split: str, num_samples: int = 500) -> None:
         self.model = model
-        self._init_dataset(dataset_name, split)
         self.task = "RealWorld"
+        self.split = split
         self.num_samples = num_samples
+        self._init_dataset(dataset_name, split)
 
 
     def _init_dataset(self, dataset_name: str, split: str) -> None:

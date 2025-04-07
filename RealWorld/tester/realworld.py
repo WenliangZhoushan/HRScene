@@ -24,6 +24,7 @@ class RealWorldTester(BaseTester):
     def _init_dataset(self, dataset_name: str, split: str) -> None:
         self.dataset = load_dataset("Wenliang04/HRScene", dataset_name)
         self.dataset = self.dataset[split]
+        self.num_samples = min(len(self.dataset), self.num_samples)
 
 
     def run(self, **generation_kwargs) -> None:
@@ -35,8 +36,14 @@ class RealWorldTester(BaseTester):
             sample["prompt"] = prompt
             inputs = self.model.process_inputs(sample)
             response = self.model.generate(inputs, **generation_kwargs)
+
+            # extract the response if output format is list
+            response = response if isinstance(response, str) else response[0]
             # remove the question from the response if it exists
             response = response.split(sample["question"])[-1]
+            # llava-next returns full history of conversation, clean it up
+            response = response.split('assistant\n')[-1].strip()
+            
             response = {
                 "response": response,
                 "metadata": sample
@@ -56,6 +63,7 @@ class RealWorldTester(BaseTester):
             metrics = metrics
 
         eval_results = metrics(self.responses, self.labels)
+        print(eval_results)
         scores = np.array([result["score"] for result in eval_results])
         
         with open(os.path.join(eval_results_dir, "eval_results.jsonl"), "w") as f:
@@ -67,9 +75,12 @@ class RealWorldTester(BaseTester):
             f.write(f"Median score: {np.median(scores)}\n")
             f.write(f"Standard deviation: {scores.std()}\n")
 
-        print(f"Finished evaluation for experiment: {self.experiment_name}")
-        print(f'- Model: {self.model_name}')
-        print(f'- Average score: {float(scores.mean()):.2f}')
-        print(f'- Median score: {float(np.median(scores)):.2f}')
-        print(f'- Standard deviation: {float(scores.std()):.2f}')
-        print(f'- Results saved in: {eval_results_dir}')
+        if not self.split == "test":
+            print(f"Finished evaluation for experiment: {self.experiment_name}")
+            print(f'- Model: {self.model_name}')
+            print(f'- Average score: {float(scores.mean()):.2f}')
+            print(f'- Median score: {float(np.median(scores)):.2f}')
+            print(f'- Standard deviation: {float(scores.std()):.2f}')
+            print(f'- Results saved in: {eval_results_dir}')
+        else:
+            pass

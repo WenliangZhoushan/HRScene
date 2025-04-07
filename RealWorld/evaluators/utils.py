@@ -10,12 +10,19 @@ def clean_response(response: str) -> str:
     return response
 
 
-def realworld_parse(response: str) -> Tuple[int, int]:
-    pattern = re.compile(r"<ans>(.*?)<\/ans>")
-    matches = pattern.findall(response)
-    if matches:
-        answer = matches[0], True
+def realworld_parse(response: str) -> str:
+    # here are some possible formats for the response we met during the experiments
+    # you could customize the pattern here to fit your needs
+    pattern1 = r'<ans>([A-Z])</ans>'
+    match1 = re.search(pattern1, response)
+    pattern2 = r'\(([A-Z])\)'
+    match2 = re.search(pattern2, response)
+    
+    if match1:
+        parsed_response = match1.group(1)
+    elif match2:
+        parsed_response = match2.group(1)
     else:
-        answer = "", False
-        
-    return answer
+        parsed_response = response
+    
+    return parsed_response
