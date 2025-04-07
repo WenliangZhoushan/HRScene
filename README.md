@@ -1,33 +1,9 @@
-# <div align="center"><h5><img src="./readme_images/logo.png" width="30" height="30" alt="logo"> HRScene - High Resolution Image Understanding</h5><div>
-
-## Outlines
-- [⭐ About HRScene](https://github.com/WenliangZhao/HRScene/blob/main/README.md#-about-mathvista)
-- [🏆 Leaderboard 🏆](https://github.com/WenliangZhao/HRScene/blob/main/README.md#-leaderboard-)
-  - [Contributing the Leaderboard](https://github.com/WenliangZhao/HRScene/blob/main/README.md#contributing-the-leaderboard)
-  - [Leaderboard on the testmini subset](https://github.com/WenliangZhao/HRScene/blob/main/README.md#leaderboard-on-the-testmini-subset)
-  - [Leaderboard on the test subset](https://github.com/WenliangZhao/HRScene/blob/main/README.md#leaderboard-on-the-test-subset)
-- [📊 Dataset Examples](https://github.com/WenliangZhao/HRScene/blob/main/README.md#-dataset-examples)
-- [📖 Dataset Usage](https://github.com/WenliangZhao/HRScene/blob/main/README.md#-dataset-usage)
-  - [Data Source](https://github.com/WenliangZhao/HRScene/blob/main/README.md#-dataset-usage)
-  - [Data Downloading](https://github.com/WenliangZhao/HRScene/blob/main/README.md#data-downloading)
-  - [Data Format](https://github.com/WenliangZhao/HRScene/blob/main/README.md#data-format)
-  - [Data Visualization](https://github.com/WenliangZhao/HRScene/blob/main/README.md#data-visualization)
-  - [Usage Demos](https://github.com/WenliangZhao/HRScene/blob/main/README.md#usage-demos)
-- [🔮 Evaluations on HRScene](https://github.com/WenliangZhao/HRScene/blob/main/README.md#-evaluations-on-mathvista)
-  - [Requirements (Optional)](https://github.com/WenliangZhao/HRScene/blob/main/README.md#requirements-optional)
-  - [Downloading Images (Optional)](https://github.com/WenliangZhao/HRScene/blob/main/README.md#downloading-images-optional)
-  - [Evaluation Pipelines](https://github.com/WenliangZhao/HRScene/blob/main/README.md#evaluation-pipelines)
-- [📜 License](https://github.com/WenliangZhao/HRScene/blob/main/README.md#-license)
-- [☕ Stay Connected!](https://github.com/WenliangZhao/HRScene/blob/main/README.md#coffee-stay-connected)
-- [✅ Cite](https://github.com/WenliangZhao/HRScene/blob/main/README.md#white_check_mark-cite)
-- [🧠 Related Work](https://github.com/WenliangZhao/HRScene/blob/main/README.md#-related-work)
-- [🤝 Contributors](https://github.com/WenliangZhao/HRScene/blob/main/README.md#-contributors)
-
+# <div align="center"><h5><img src="./readme_images/logo.png" width="30" height="30" alt="logo"> HRScene - High Resolution Image Understanding</h5></div>
 
 ## ⭐ About HRScene
 
 <p>We introduce <strong>HRScene</strong>, a novel unified benchmark for HRI understanding with rich scenes. LogoHRScene incorporates 25 real-world datasets and 2 synthetic diagnostic datasets with resolutions ranging from <strong>1,024 × 1,024 to 35,503 × 26,627</strong>. HRScene is collected and re-annotated by 10 graduate-level annotators, covering <strong>25 scenarios</strong>, ranging from microscopic and radiology images to street views, long-range pictures, and telescope images. It includes high-resolution images of real-world objects, scanned documents, and composite multi-image.</p>
-<img src="https://yszh8.github.io/hrscene/static/images/fig3.png" alt="Dataset Sample Image" class="resized-image" style="max-width:80%; height:auto; display:block;">
+<img src="./readme_images/example.png" alt="Dataset Sample Image" class="resized-image" style="max-width:100%; height:auto; display:block;">
 <p> Some examples of LogoHRScene. Blue ones are diagnostic datasets, and purple ones are real-world datasets. In this challenge, we only focus on the submission of real-world examples.</p>
 
 <p>HRScene consists of 7,073 samples, divided into three splits:</p>
@@ -56,10 +32,13 @@ test features the remaining 5,323 samples for standard evaluation. Notably, the 
 
 ### Leaderboard on the RealWorld Task
 
-| **#** | **Model** | **Art** | **Daily** | **Medical** |**Paper** | **Remote** | **Research** | **Sub-Img** | **Urban** | **Average** |
-| ----- | ------------------------------------ | ---------- | ------------------------------------------------------------ | ---------- | -------- | ------- | ------- | ------- | ------- | ------- |
-| -     | **Human Performance\***              | -          | [Link](https://arxiv.org/abs/2310.02255)                     | 2023-10-03 | **60.3** | 59.7    | 48.4    | 73.0    | 63.2    | 55.9    | 50.9    | 59.2    | 51.4    | 40.7    | 53.8    | 64.9    | 63.9    |
-| 1     | **OpenAI o1 🥇**                      | LMM 🖼️      | [Link](https://openai.com/index/learning-to-reason-with-llms/) | 2024-09-12 | **73.9** | -       | -       | -       | -       | -       | -       | -       | -       | -       | -       | -       | -       |
+| **#** | **Model** | **Art** | **Daily** | **Medical** | **Paper** | **Remote** | **Research** | **Sub-Img** | **Urban** | **Average** |
+| ----- | --------- | ------- | --------- | ----------- | --------- | ---------- | ------------ | ----------- | --------- | ----------- |
+| 1 | **Qwen2-72B-Instruct** | 72.7 | 64.3 | 45.9 | 76.5 | 54.9 | 46.8 | 79.3 | 46.2 | **62.2** |
+| 2 | **gemini-2-flash** | 74.3 | 59.4 | 57.1 | 75.3 | 56.1 | 41.9 | 73.2 | 40.2 | **60.3** |
+| 3 | **InternVL2-40B** | 70.2 | 62.8 | 35.4 | 67.6 | 50.3 | 51.4 | 77.2 | 41.0 | **58.1** |
+| 4 | **Qwen2-VL-7B-Instruct** | 71.0 | 61.4 | 48.5 | 62.9 | 55.6 | 46.0 | 79.5 | 34.4 | **57.7** |
+| 5 | **Llava-OneVision-72B** | 65.1 | 64.3 | 49.8 | 65.0 | 48.0 | 55.6 | 63.7 | 41.1 | **56.9** |
 
 
 ## 📊 Dataset Examples
@@ -97,10 +76,6 @@ answer: "B"
 </p>
 
 ## 📖 Dataset Usage
-
-### Data Source
-
-TODO: 哪里收集来的
 
 ### Data Downloading
 
@@ -201,11 +176,3 @@ Finished parsing, results saved in: results/realworld/20250406_203208. Ready for
 ## :white_check_mark: Cite
 
 TODO: 等paper挂arxiv我加
-
-## 🧠 Related Work
-
-TODO: 要留着吗？
-
-## 🤝 Contributors
-
-TODO: 可以把标过数据的都加上？
