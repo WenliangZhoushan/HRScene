@@ -27,7 +27,7 @@
 ## ⭐ About HRScene
 
 <p>We introduce <strong>HRScene</strong>, a novel unified benchmark for HRI understanding with rich scenes. LogoHRScene incorporates 25 real-world datasets and 2 synthetic diagnostic datasets with resolutions ranging from <strong>1,024 × 1,024 to 35,503 × 26,627</strong>. HRScene is collected and re-annotated by 10 graduate-level annotators, covering <strong>25 scenarios</strong>, ranging from microscopic and radiology images to street views, long-range pictures, and telescope images. It includes high-resolution images of real-world objects, scanned documents, and composite multi-image.</p>
-<img src="https://yszh8.github.io/hrscene/static/images/fig3.png" alt="Dataset Sample Image" class="resized-image" style="max-width:100%; height:auto; display:block;">
+<img src="https://yszh8.github.io/hrscene/static/images/fig3.png" alt="Dataset Sample Image" class="resized-image" style="max-width:80%; height:auto; display:block;">
 <p> Some examples of LogoHRScene. Blue ones are diagnostic datasets, and purple ones are real-world datasets. In this challenge, we only focus on the submission of real-world examples.</p>
 
 <p>HRScene consists of 7,073 samples, divided into three splits:</p>
