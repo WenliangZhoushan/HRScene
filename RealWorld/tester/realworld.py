@@ -63,24 +63,35 @@ class RealWorldTester(BaseTester):
             metrics = metrics
 
         eval_results = metrics(self.responses, self.labels)
-        print(eval_results)
-        scores = np.array([result["score"] for result in eval_results])
         
-        with open(os.path.join(eval_results_dir, "eval_results.jsonl"), "w") as f:
-            for result in eval_results:
-                f.write(json.dumps(result) + "\n")
-        
-        with open(os.path.join(eval_results_dir, "eval_scores.txt"), "w") as f:
-            f.write(f"Average score: {scores.mean()}\n")
-            f.write(f"Median score: {np.median(scores)}\n")
-            f.write(f"Standard deviation: {scores.std()}\n")
-
         if not self.split == "test":
-            print(f"Finished evaluation for experiment: {self.experiment_name}")
-            print(f'- Model: {self.model_name}')
-            print(f'- Average score: {float(scores.mean()):.2f}')
-            print(f'- Median score: {float(np.median(scores)):.2f}')
-            print(f'- Standard deviation: {float(scores.std()):.2f}')
-            print(f'- Results saved in: {eval_results_dir}')
+            scores = np.array([result["score"] for result in eval_results])
+
+            with open(os.path.join(eval_results_dir, "eval_results.jsonl"), "w") as f:
+                for result in eval_results:
+                    f.write(json.dumps(result) + "\n")
+            
+            with open(os.path.join(eval_results_dir, "eval_scores.txt"), "w") as f:
+                f.write(f"Average score: {scores.mean()}\n")
+                f.write(f"Median score: {np.median(scores)}\n")
+                f.write(f"Standard deviation: {scores.std()}\n")
+
+                print(f"Finished evaluation for experiment: {self.experiment_name}")
+                print(f'- Model: {self.model_name}')
+                print(f'- Average score: {float(scores.mean()):.2f}')
+                print(f'- Median score: {float(np.median(scores)):.2f}')
+                print(f'- Standard deviation: {float(scores.std()):.2f}')
+                print(f'- Results saved in: {eval_results_dir}')
         else:
-            pass
+            submission = {str(item['id']): item['parsed_response'] for item in eval_results}
+
+            with open(os.path.join(eval_results_dir, "predictions.jsonl"), "a") as f:
+                for result in eval_results:
+                    result.pop("score")
+                    result.pop("answer")
+                    f.write(json.dumps(result) + "\n")
+
+            with open(os.path.join(eval_results_dir, "submission.json"), "w") as f:
+                json.dump(submission, f)
+
+            print(f"Finished parsing, results saved in: {eval_results_dir}. Ready for submission.")
