@@ -7,10 +7,12 @@
 <p> Some examples of LogoHRScene. Blue ones are diagnostic datasets, and purple ones are real-world datasets. In this challenge, we only focus on the submission of real-world examples.</p>
 
 <p>HRScene consists of 7,073 samples, divided into three splits:</p>
-val contains 750 samples. These samples are identical to human-annotated ones, designed for fine-grained validation of the users' VLM settings. |
-testmini comprises 1,000 samples, picked from each LogoHRScene real-world dataset, intended for rapid model development evaluation or for those with limited computing resources. | 
+val contains 750 samples. These samples are identical to human-annotated ones, designed for fine-grained validation of the users' VLM settings.
+
+testmini comprises 1,000 samples, picked from each LogoHRScene real-world dataset, intended for rapid model development evaluation or for those with limited computing resources.
+
 test features the remaining 5,323 samples for standard evaluation. Notably, the answer labels for test will not be publicly released to facilitate fair evaluation. Instead, we maintain an online evaluation platform for user submissions. |
-<img src="https://yszh8.github.io/hrscene/static/images/fig1a.png" alt="Dataset Image Types" class="resized-image" style="max-width:100%; height:auto; display:block;">
+<img src="https://yszh8.github.io/hrscene/static/images/fig1a.png" alt="Dataset Image Types" class="resized-image" style="max-width:60%; height:auto; display:block;margin: 0 auto;">
 
 ## 🏆 Leaderboard 🏆
 
@@ -132,6 +134,8 @@ answer: str
 ## 🔮 Evaluations on HRScene
 
 Submit your results to [EvalAI](https://eval.ai/web/challenges/challenge-page/2501/submission) and get your score on the leaderboard.
+
+If you would like to show your results on the [offical leaderboard](https://yszh8.github.io/hrscene/#leaderboard), please send an email to wmz5132@psu.edu and cc yfz5488@psu.edu, with your team name, model total parameters (optional) and leaderboard submission name in EvalAI.
 
 If you were using our pipeline to run `realworld_combined` for `test` split, it will generate a `submission.json` file for you, file save path will be printed on the terminal.
 
