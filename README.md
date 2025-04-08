@@ -159,4 +159,11 @@ Finished parsing, results saved in: results/realworld/20250406_203208. Ready for
 
 ## :white_check_mark: Cite
 
-TODO: 等paper挂arxiv我加
+```bibtex
+@article{zhang2025hrscene,
+    title={HRScene: How Far Are VLMs from Effective High-Resolution Image Understanding?},
+    author={Zhang, Yusen and Zheng, Wenliang and Madasu, Aashrith and Shi, Peng and Kamoi, Ryo and Zhou, Hao and Zou, Zhuoyang and Zhao, Shu and Das, Sarkar Snigdha Sarathi and Gupta, Vipul and Lu, Xiaoxin and Zhang, Nan and Zhang, Ranran Haoran and Iyer, Avitej and Lou, Renze and Yin, Wenpeng and Zhang, Rui},
+    journal={arXiv preprint},
+    year={2025}
+} 
+```
