@@ -14,22 +14,6 @@ test features the remaining 5,323 samples for standard evaluation. Notably, the 
 
 ## 🏆 Leaderboard 🏆
 
-我白天叫gpt做ocr把这些填了，手动填太慢了
-
-### Leaderboard on the WhiteBackground Task
-
-| **#** | **Model** | **1x1** | **3x3** | **5x5** |**7x7** | **10x10** |
-| ----- | ------------------------------------ | ---------- | ------------------------------------------------------------ | ---------- | -------- | ------- |
-| -     | **Human Performance\***              | -          | [Link](https://arxiv.org/abs/2310.02255)                     | 2023-10-03 | **60.3** | 59.7    | 48.4    | 73.0    | 63.2    | 55.9    | 50.9    | 59.2    | 51.4    | 40.7    | 53.8    | 64.9    | 63.9    |
-| 1     | **OpenAI o1 🥇**                      | LMM 🖼️      | [Link](https://openai.com/index/learning-to-reason-with-llms/) | 2024-09-12 | **73.9** | -       | -       | -       | -       | -       | -       | -       | -       | -       | -       | -       | -       |
-
-### Leaderboard on the ComplexGrid Task
-
-| **#** | **Model** | **3x3** | **5x5** |**7x7** | **10x10** |
-| ----- | ------------------------------------ | ------------------------------------------------------------ | ---------- | -------- | ------- |
-| -     | **Human Performance\***              | -          | [Link](https://arxiv.org/abs/2310.02255)                     | 2023-10-03 | **60.3** | 59.7    | 48.4    | 73.0    | 63.2    | 55.9    | 50.9    | 59.2    | 51.4    | 40.7    | 53.8    | 64.9    | 63.9    |
-| 1     | **OpenAI o1 🥇**                      | LMM 🖼️      | [Link](https://openai.com/index/learning-to-reason-with-llms/) | 2024-09-12 | **73.9** | -       | -       | -       | -       | -       | -       | -       | -       | -       | -       | -       | -       |
-
 ### Leaderboard on the RealWorld Task
 
 | **#** | **Model** | **Art** | **Daily** | **Medical** | **Paper** | **Remote** | **Research** | **Sub-Img** | **Urban** | **Average** |
