@@ -2,16 +2,17 @@
 
 ## ⭐ About HRScene
 
-<p>We introduce <strong>HRScene</strong>, a novel unified benchmark for HRI understanding with rich scenes. LogoHRScene incorporates 25 real-world datasets and 2 synthetic diagnostic datasets with resolutions ranging from <strong>1,024 × 1,024 to 35,503 × 26,627</strong>. HRScene is collected and re-annotated by 10 graduate-level annotators, covering <strong>25 scenarios</strong>, ranging from microscopic and radiology images to street views, long-range pictures, and telescope images. It includes high-resolution images of real-world objects, scanned documents, and composite multi-image.</p>
+<p>We introduce <strong>HRScene</strong>, a novel unified benchmark for HRI understanding with rich scenes. HRScene incorporates 25 real-world datasets and 2 synthetic diagnostic datasets with resolutions ranging from <strong>1,024 × 1,024 to 35,503 × 26,627</strong>. HRScene is collected and re-annotated by 10 graduate-level annotators, covering <strong>25 scenarios</strong>, ranging from microscopic and radiology images to street views, long-range pictures, and telescope images. It includes high-resolution images of real-world objects, scanned documents, and composite multi-image.</p>
 <img src="./readme_images/example.png" alt="Dataset Sample Image" class="resized-image" style="max-width:100%; height:auto; display:block;">
-<p> Some examples of LogoHRScene. Blue ones are diagnostic datasets, and purple ones are real-world datasets. In this challenge, we only focus on the submission of real-world examples.</p>
+<p> Some examples of HRScene. Blue ones are diagnostic datasets, and purple ones are real-world datasets.</p>
 
 <p>HRScene consists of 7,073 samples, divided into three splits:</p>
-val contains 750 samples. These samples are identical to human-annotated ones, designed for fine-grained validation of the users' VLM settings.
 
-testmini comprises 1,000 samples, picked from each LogoHRScene real-world dataset, intended for rapid model development evaluation or for those with limited computing resources.
+Val contains 750 samples. These samples are identical to human-annotated ones, designed for fine-grained validation of the users' VLM settings.
 
-test features the remaining 5,323 samples for standard evaluation. Notably, the answer labels for test will not be publicly released to facilitate fair evaluation. Instead, we maintain an online evaluation platform for user submissions. |
+Testmini comprises 1,000 samples, picked from each HRScene real-world dataset, intended for rapid model development evaluation or for those with limited computing resources.
+
+Test features the remaining 5,323 samples for standard evaluation. Notably, the answer labels for test will not be publicly released to facilitate fair evaluation. Instead, we maintain an online evaluation platform for user submissions.
 <img src="https://yszh8.github.io/hrscene/static/images/fig1a.png" alt="Dataset Image Types" class="resized-image" style="max-width:60%; height:auto; display:block;margin: 0 auto;">
 
 ## 🏆 Leaderboard 🏆
