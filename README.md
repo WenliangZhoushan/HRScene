@@ -1,5 +1,14 @@
 # <div align="center"><h5><img src="./readme_images/logo.png" width="30" height="30" alt="logo"> HRScene - High Resolution Image Understanding</h5></div>
 
+<div align="center">
+<a href="https://arxiv.org/abs/2412.09722" target="_blank"><img src=https://img.shields.io/badge/Website-8A2BE2></a>
+<a href="https://arxiv.org/abs/2412.09722" target="_blank"><img src=https://img.shields.io/badge/🤗Dataset-HRScene-yellow></a>
+<a href="https://arxiv.org/abs/2412.09722" target="_blank"><img src=https://img.shields.io/badge/arXiv-2412.09722-b31b1b.svg></a>
+<a href="https://arxiv.org/abs/2412.09722" target="_blank"><img src=https://img.shields.io/badge/EvalAI-2C57E2></a>
+<a href="https://github.com/WenliangZhoushan/HRScene/issues" target="_blank"><img src=https://img.shields.io/github/issues-pr/WenliangZhoushan/GreaterPrompt></a>
+<a href="https://github.com/WenliangZhoushan/HRScene/pulls" target="_blank"><img src=https://img.shields.io/github/issues/WenliangZhoushan/GreaterPrompt></a>
+</div>
+
 ## ⭐ About HRScene
 
 <p>We introduce <strong>HRScene</strong>, a novel unified benchmark for HRI understanding with rich scenes. HRScene incorporates 25 real-world datasets and 2 synthetic diagnostic datasets with resolutions ranging from <strong>1,024 × 1,024 to 35,503 × 26,627</strong>. HRScene is collected and re-annotated by 10 graduate-level annotators, covering <strong>25 scenarios</strong>, ranging from microscopic and radiology images to street views, long-range pictures, and telescope images. It includes high-resolution images of real-world objects, scanned documents, and composite multi-image.</p>
