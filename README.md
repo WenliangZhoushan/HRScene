@@ -23,7 +23,9 @@ Testmini comprises 1,000 samples, picked from each HRScene real-world dataset, i
 
 Test features the remaining 5,323 samples for standard evaluation. Notably, the answer labels for test will not be publicly released to facilitate fair evaluation. Instead, we maintain an online evaluation platform for user submissions.
 
-<img src="https://yszh8.github.io/hrscene/static/images/fig1a.png" alt="Dataset Image Types" class="resized-image" style="max-width:50%; height:auto; display:block;margin: 0 auto;">
+<p align="center">
+    <img src="./readme_images/piechart.png" width="60%"> <br>
+</p>
 
 ## 🏆 Leaderboard 🏆
 
