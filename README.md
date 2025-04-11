@@ -22,7 +22,7 @@ Val contains 750 samples. These samples are identical to human-annotated ones, d
 Testmini comprises 1,000 samples, picked from each HRScene real-world dataset, intended for rapid model development evaluation or for those with limited computing resources.
 
 Test features the remaining 5,323 samples for standard evaluation. Notably, the answer labels for test will not be publicly released to facilitate fair evaluation. Instead, we maintain an online evaluation platform for user submissions.
-<img src="https://yszh8.github.io/hrscene/static/images/fig1a.png" alt="Dataset Image Types" class="resized-image" style="max-width:60%; height:auto; display:block;margin: 0 auto;">
+<img src="https://yszh8.github.io/hrscene/static/images/fig1a.png" alt="Dataset Image Types" class="resized-image" style="max-width:40%; height:auto; display:block;margin: 0 auto;">
 
 ## 🏆 Leaderboard 🏆
 
