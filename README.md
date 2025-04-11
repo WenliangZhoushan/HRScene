@@ -178,23 +178,6 @@ If you would like to show your results on the offical leaderboard, please send a
 
 ## 🔮 Evaluations on HRScene for Diagnosis Task
 
-### Leaderboard on the WhiteBackground Task
-
-<p align="center">
-    <img src="https://yszh8.github.io/hrscene/static/images/tab4.png" alt="Dataset Image Types" class="resized-image" style="max-width:100%; height:auto; display:block;margin: 0 auto;">
-</p>
-
-Diagnostic NIAH test on WhiteBackground dataset, **bold** indicates the best performance.
-
-### Leaderboard on the ComplexGrid Task
-
-<p align="center">
-    <img src="https://yszh8.github.io/hrscene/static/images/fig4.png" alt="Dataset Image Types" class="resized-image" style="max-width:100%; height:auto; display:block;margin: 0 auto;">
-</p>
-
-Performance of the regions averaged across all dataset points and all 18 VLMs. X-Axis is the Manhattan distance to the left upper corner, |x − 1| + |y − 1| where x, y is the row and column of the needle image, while the y-axis is the performance of that sample. With the increase of the x-axis, the performance of the model exhibits a U-shape, with much lower performance in the middle. With the increase in the image size, the shape becomes more significant.
-
-
 We provide two diagnostic datasets, including **WhiteBackground** and **ComplexGrid**, to detect the regional defects of VLMs on HRI understanding. The following code contains the demos to run on these datasets:
 
 #### Running the Model
@@ -248,6 +231,21 @@ Example JSON evaluation results:
 {"id": "0_2_2", "caption": "A nice living room has chairs and a love seat.", "answer": "row: 3, col: 3", "response": "         Do not add anything else.         The answer is: <row>3</row><col>3</col>.         The final answer is: 3,3.         Thank you.         The image is a collage of nine photographs, each with a caption.         The captions are: \"row 1, column 1\", \"row 1, column 2\", \"row 1, column 3\", \"row 2, column 1\", \"row 2", "parsed_response": "row: 3, col: 3", "score": 1}
 ```
 
+### Evaluation of WhiteBackground Task - Regional Divergence
+
+<p align="center">
+    <img src="https://yszh8.github.io/hrscene/static/images/tab4.png" alt="Dataset Image Types" class="resized-image" style="max-width:100%; height:auto; display:block;margin: 0 auto;">
+</p>
+
+Diagnostic NIAH test on WhiteBackground dataset, **bold** indicates the best performance.
+
+### Evaluation of ComplexGrid Task - Lost-in-the-Middle (Manhattan)
+
+<p align="center">
+    <img src="https://yszh8.github.io/hrscene/static/images/fig4.png" alt="Dataset Image Types" class="resized-image" style="max-width:100%; height:auto; display:block;margin: 0 auto;">
+</p>
+
+Performance of the regions averaged across all dataset points and all 18 VLMs. X-Axis is the Manhattan distance to the left upper corner, |x − 1| + |y − 1| where x, y is the row and column of the needle image, while the y-axis is the performance of that sample. With the increase of the x-axis, the performance of the model exhibits a U-shape, with much lower performance in the middle. With the increase in the image size, the shape becomes more significant.
 
 ## 📜 License
 
